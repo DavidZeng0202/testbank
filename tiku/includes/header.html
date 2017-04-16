@@ -1,0 +1,53 @@
+<?php
+//session_start();
+?>
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title><?php echo $page_title; ?></title>
+		<link rel="stylesheet" href="includes/style.css" type="text/css" media="screen" />
+		<meta http-equiv="content-type" ccontent="text/html; charset=utf-8" />
+	</head>
+	<body>
+		<div id="header">
+			<h1>在线题库</h1>
+			<h2>激动人心的口号</h2>
+		</div>
+		<div id="navigation">
+			<ul>
+				<!--<li><a href="index.php">主页</a></li>-->
+				<!-- <li><a href="test.php">历年真题</a></li> -->
+				<!-- <li> <a href="#">错题本</a></li> -->
+				<!-- <li> <a href="password.php">个人中心</a> </li> -->
+				<!-- <li> <a href="register.php">注册</a> </li> -->
+				<li><?php 
+				
+				if(isset($_SESSION['user_id']))
+		//		if((isset($_SESSION['user_id']))&&(basename($_SERVER['PHP_SELF'])!='logout.php'))
+				{
+					if($_SESSION['user_level']==1){
+						echo '
+						<li><a href="view_users.php" >用户管理</a></li>
+						<li><a href="update_question.php" >上传试题</a></li>
+						<li><a href="view_questions.php" >试题管理</a></li>
+						<li><a href="view_notes.php" >错题管理</a></li>';
+					}
+
+					if($_SESSION['user_level']==0){
+						echo '
+						<li><a href="test.php">历年真题</a></li>
+						<li><a href="password.php">个人中心</a></li>
+						<li> <a href="notes.php">错题本</a></li>
+						<li> <a href="search.php">查询试题</a></li>';
+					}
+					echo '<li><a href="logout.php">注销</a></li>';
+				} else {
+					echo '
+					<li><a href="test.php">历年真题</a></li>
+					<li> <a href="register.php">注册</a> </li>
+					<li><a href="login.php">登录</a></li>';
+				}
+				?></li>
+			</ul>
+		</div>
+		<div id="content">
